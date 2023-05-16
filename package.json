@@ -1,0 +1,18 @@
+{
+  "name": "getting-started-express",
+  "version": "1.0.0",
+  "description": "Getting Started with Smartcar and Express",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^5.3.4",
+    "smartcar": "github:ssj9685/node-sdk"
+  },
+  "engines": {
+    "node": ">=14.4.0",
+    "npm": ">=8.3.0"
+  }
+}
