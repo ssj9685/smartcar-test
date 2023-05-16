@@ -1,7 +1,8 @@
 'use strict';
 
-const express = require('express');
-const { Smartcar, AuthClient, Vehicle } = require('smartcar');
+import express from 'express';
+import { Smartcar, AuthClient, Vehicle } from 'smartcar';
+import config from './config.js';
 
 const app = express();
 
@@ -10,9 +11,9 @@ const port = 8000;
 const smartcar = new Smartcar();
 
 const client = new AuthClient({
-  clientId: 'clientId',
-  clientSecret: 'clientSecret',
-  redirectUri: 'http://localhost:8000/exchange',
+  clientId: config.clientId,
+  clientSecret: config.clientSecret,
+  redirectUri: config.redirectUri,
 });
 
 app.get('/', function (req, res) {
@@ -43,13 +44,13 @@ app.get('/exchange', async function (req, res) {
   if (!code) return;
 
   const access = await client.exchangeCode(code);
+  console.log(access);
+
   const { vehicles } = await smartcar.getVehicles(access.accessToken);
-  console.log(access.accessToken);
   const vehicle = new Vehicle(vehicles[0], access.accessToken);
   const attributes = await vehicle.attributes();
 
   console.log(attributes);
-  req.sendStatus(200);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

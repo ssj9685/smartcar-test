@@ -1,6 +1,7 @@
 {
   "name": "getting-started-express",
   "version": "1.0.0",
+  "type": "module",
   "description": "Getting Started with Smartcar and Express",
   "scripts": {
     "start": "node index.js"
